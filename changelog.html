@@ -1,59 +1,196 @@
 <!DOCTYPE html>
 
 <html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>更新日志</title>
-    <link href="https://cdn.tailwindcss.com" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#4FC08D',
-                        secondary: '#2C3E50',
-                    },
-                },
-            },
-        };
-    </script>
-</head>
-<body class="bg-light text-dark font-sans">
-<div class="container mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold text-secondary mb-6">更新日志</h1>
-    <div class="space-y-6">
-        <!-- 版本 1.2.0 -->
-        <div class="p-6 bg-white rounded-lg shadow-md">
-            <h2 class="text-xl font-semibold text-primary">版本 1.2.0</h2>
-            <p class="text-gray-600 text-sm">发布日期: 2025-10-01</p>
-            <ul class="list-disc pl-6 mt-4 text-gray-700">
-                <li>新增数据可视化模块，支持多种图表类型。</li>
-                <li>优化权限管理功能，提升安全性。</li>
-                <li>修复已知的界面显示问题。</li>
-            </ul>
-        </div>
-        <!-- 版本 1.1.0 -->
-        <div class="p-6 bg-white rounded-lg shadow-md">
-            <h2 class="text-xl font-semibold text-primary">版本 1.1.0</h2>
-            <p class="text-gray-600 text-sm">发布日期: 2025-09-15</p>
-            <ul class="list-disc pl-6 mt-4 text-gray-700">
-                <li>新增用户管理模块，支持批量操作。</li>
-                <li>优化系统性能，提升加载速度。</li>
-                <li>修复移动端导航栏的显示问题。</li>
-            </ul>
-        </div>
-        <!-- 版本 1.0.0 -->
-        <div class="p-6 bg-white rounded-lg shadow-md">
-            <h2 class="text-xl font-semibold text-primary">版本 1.0.0</h2>
-            <p class="text-gray-600 text-sm">发布日期: 2025-09-01</p>
-            <ul class="list-disc pl-6 mt-4 text-gray-700">
-                <li>初始版本发布，包含基本的后台管理功能。</li>
-                <li>支持用户登录、权限管理和数据展示。</li>
-            </ul>
-        </div>
-    </div>
-</div>
-</body>
-</html>
 
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>拓力(Tulip) - 更新日志</title>
+        <meta name="description" content="拓力(Tulip)企业级后台管理系统的更新日志，记录系统的重要更新和改进。">
+        <!-- Tailwind CSS -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <!-- Font Awesome -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+
+        <!-- 自定义Tailwind配置 -->
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            primary: '#4FC08D', // 主色调：绿松色
+                            secondary: '#2C3E50', // 辅助色：深蓝
+                            accent: '#3498DB', // 强调色：亮蓝
+                            light: '#F0F7FF', // 浅色背景（浅蓝色）
+                            dark: '#34495E', // 深色文本
+                            success: '#2ECC71', // 成功/修复色
+                            info: '#3498DB', // 信息/优化色
+                            warning: '#F39C12', // 警告/添加色
+                        },
+                        fontFamily: {
+                            inter: ['Inter', 'system-ui', 'sans-serif'],
+                        },
+                    },
+                }
+            }
+        </script>
+
+        <style>
+            body {
+                font-family: 'Inter', system-ui, sans-serif;
+                background-color: #F0F7FF;
+                color: #34495E;
+            }
+
+            h1, h2 {
+                color: #2C3E50;
+            }
+
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 2rem;
+            }
+
+            .changelog-entry {
+                border: 1px solid #e0e0e0;
+                border-radius: 8px;
+                padding: 1.5rem;
+                margin-bottom: 1.5rem;
+                background-color: white;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+            .changelog-date {
+                font-size: 0.9rem;
+                color: #7f8c8d;
+                margin-bottom: 0.5rem;
+            }
+
+            .changelog-features {
+                list-style-type: none;
+                padding-left: 0;
+            }
+
+            .changelog-features li {
+                margin-bottom: 0.75rem;
+                padding-left: 1.5rem;
+                position: relative;
+            }
+
+            .changelog-features li::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0.5rem;
+                width: 0.6rem;
+                height: 0.6rem;
+                border-radius: 50%;
+            }
+
+            .changelog-features .fix::before {
+                background-color: #2ECC71;
+            }
+
+            .changelog-features .optimization::before {
+                background-color: #3498DB;
+            }
+
+            .changelog-features .addition::before {
+                background-color: #F39C12;
+            }
+
+            .category-header {
+                font-weight: 600;
+                margin-top: 1rem;
+                margin-bottom: 0.5rem;
+                text-transform: uppercase;
+                font-size: 0.9rem;
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- 导航栏 -->
+        <nav id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 bg-white/90 backdrop-blur-sm shadow-sm">
+            <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <a href="#" class="flex items-center">
+                        <div class="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
+                            <i class="fa fa-cube text-white"></i>
+                        </div>
+                        <span class="ml-2 text-xl font-semibold text-dark">拓力(Tulip)</span>
+                    </a>
+                </div>
+
+                <!-- 桌面导航 -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="index.html" class="text-secondary hover:text-primary transition-colors">首页</a>
+                    <a href="index.html#features" class="text-secondary hover:text-primary transition-colors">功能介绍</a>
+                    <a href="index.html#preview" class="text-secondary hover:text-primary transition-colors">系统预览</a>
+                    <a href="index.html#docs" class="text-secondary hover:text-primary transition-colors">技术文档</a>
+                    <a href="https://github.com/EvanFor/tulip.git" target="_blank" class="px-5 py-2 bg-primary text-white rounded-full hover:bg-primary/90 transition-all shadow-md hover:shadow-lg">GitHub</a>
+                </div>
+
+                <!-- 移动端菜单按钮 -->
+                <button id="menu-toggle" class="md:hidden text-secondary text-xl">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+
+            <!-- 移动端导航菜单 -->
+            <div id="mobile-menu" class="md:hidden hidden bg-white border-t">
+                <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
+                    <a href="index.html" class="py-2 text-secondary hover:text-primary transition-colors">首页</a>
+                    <a href="index.html#features" class="py-2 text-secondary hover:text-primary transition-colors">功能介绍</a>
+                    <a href="index.html#preview" class="py-2 text-secondary hover:text-primary transition-colors">系统预览</a>
+                    <a href="index.html#docs" class="py-2 text-secondary hover:text-primary transition-colors">技术文档</a>
+                    <a href="https://github.com/EvanFor/tulip.git" target="_blank" class="py-3 bg-primary text-white rounded-full text-center hover:bg-primary/90 transition-all shadow-md hover:shadow-lg">GitHub</a>
+                </div>
+            </div>
+        </nav>
+
+        <main class="pt-16">
+                <div class="container">
+                    <h1 class="text-3xl font-bold mb-4">更新日志</h1>
+
+                    <!-- 示例更新条目 -->
+                    <div class="changelog-entry">
+                        <div class="changelog-date">2024年7月15日</div>
+                        <h2 class="text-xl font-bold mb-2">版本 1.0.0</h2>
+
+                        <div class="category-header text-success">
+                            <i class="fa fa-wrench mr-2"></i>修复
+                        </div>
+                        <ul class="changelog-features">
+                            <li class="fix">修复了移动端轮播按钮贴边和底边无留白的问题。</li>
+                        </ul>
+
+                        <div class="category-header text-info">
+                            <i class="fa fa-bolt mr-2"></i>优化
+                        </div>
+                        <ul class="changelog-features">
+                            <li class="optimization">优化了部分页面的响应式布局。</li>
+                        </ul>
+
+                        <div class="category-header text-warning">
+                            <i class="fa fa-plus-circle mr-2"></i>添加
+                        </div>
+                        <ul class="changelog-features">
+                            <li class="addition">添加了更新日志页面。</li>
+                        </ul>
+                    </div>
+                </div>
+            </main>
+
+        <script>
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            menuToggle.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        </script>
+    </body>
+
+</html>
