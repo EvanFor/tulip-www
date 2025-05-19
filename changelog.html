@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>更新日志</title>
+    <link href="https://cdn.tailwindcss.com" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4FC08D',
+                        secondary: '#2C3E50',
+                    },
+                },
+            },
+        };
+    </script>
+</head>
+<body class="bg-light text-dark font-sans">
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold text-secondary mb-6">更新日志</h1>
+    <div class="space-y-6">
+        <!-- 版本 1.2.0 -->
+        <div class="p-6 bg-white rounded-lg shadow-md">
+            <h2 class="text-xl font-semibold text-primary">版本 1.2.0</h2>
+            <p class="text-gray-600 text-sm">发布日期: 2025-10-01</p>
+            <ul class="list-disc pl-6 mt-4 text-gray-700">
+                <li>新增数据可视化模块，支持多种图表类型。</li>
+                <li>优化权限管理功能，提升安全性。</li>
+                <li>修复已知的界面显示问题。</li>
+            </ul>
+        </div>
+        <!-- 版本 1.1.0 -->
+        <div class="p-6 bg-white rounded-lg shadow-md">
+            <h2 class="text-xl font-semibold text-primary">版本 1.1.0</h2>
+            <p class="text-gray-600 text-sm">发布日期: 2025-09-15</p>
+            <ul class="list-disc pl-6 mt-4 text-gray-700">
+                <li>新增用户管理模块，支持批量操作。</li>
+                <li>优化系统性能，提升加载速度。</li>
+                <li>修复移动端导航栏的显示问题。</li>
+            </ul>
+        </div>
+        <!-- 版本 1.0.0 -->
+        <div class="p-6 bg-white rounded-lg shadow-md">
+            <h2 class="text-xl font-semibold text-primary">版本 1.0.0</h2>
+            <p class="text-gray-600 text-sm">发布日期: 2025-09-01</p>
+            <ul class="list-disc pl-6 mt-4 text-gray-700">
+                <li>初始版本发布，包含基本的后台管理功能。</li>
+                <li>支持用户登录、权限管理和数据展示。</li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
