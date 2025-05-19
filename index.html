@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>拓力 - 企业级后台管理系统</title>
+        <!-- Tailwind CSS -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <!-- Font Awesome -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+
+        <!-- 自定义Tailwind配置 -->
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            primary: '#4FC08D', // 主色调：绿松色
+                            secondary: '#2C3E50', // 辅助色：深蓝
+                            accent: '#3498DB', // 强调色：亮蓝
+                            light: '#F0F7FF', // 浅色背景（浅蓝色）
+                            dark: '#34495E', // 深色文本
+                        },
+                        fontFamily: {
+                            inter: ['Inter', 'system-ui', 'sans-serif'],
+                        },
+                    },
+                }
+            }
+        </script>
+
+        <!-- 自定义工具类 -->
+        <style type="text/tailwindcss">
+            @layer utilities {
+                .content-auto {
+                    content-visibility: auto;
+                }
+
+                .carousel-item {
+                    transition: transform 0.5s ease-in-out;
+                }
+
+                .card-hover {
+                    transition: all 0.3s ease;
+                }
+
+                .card-hover:hover {
+                    transform: translateY(-8px);
+                    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+                }
+
+                .gradient-bg {
+                    background: linear-gradient(135deg, #E6F4FF 0%, #F0F7FF 100%);
+                }
+            }
+        </style>
+
+        <style>
+            /* 全局样式 */
+            body {
+                font-family: 'Inter', system-ui, sans-serif;
+            }
+
+            /* 轮播图动画 */
+            .carousel {
+                overflow: hidden;
+                position: relative;
+            }
+
+            .carousel-inner {
+                display: flex;
+                transition: transform 0.5s ease-in-out;
+            }
+
+            /* 平滑滚动 */
+            html {
+                scroll-behavior: smooth;
+            }
+
+            /* 导航栏滚动效果 */
+            .navbar-scrolled {
+                background-color: rgba(255, 255, 255, 0.95);
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            }
+        </style>
+    </head>
+
+    <body class="bg-light text-dark">
+        <!-- 导航栏 -->
+        <nav id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 bg-white/90 backdrop-blur-sm shadow-sm">
+            <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fa fa-cogs text-primary text-2xl"></i>
+                    <span class="text-xl font-bold text-secondary">拓力(Tulip)</span>
+                </div>
+
+                <!-- 桌面导航 -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#home" class="text-secondary hover:text-primary transition-colors">首页</a>
+                    <a href="#features" class="text-secondary hover:text-primary transition-colors">功能介绍</a>
+                    <a href="#preview" class="text-secondary hover:text-primary transition-colors">系统预览</a>
+                    <a href="#docs" class="text-secondary hover:text-primary transition-colors">技术文档</a>
+                    <a href="https://github.com/EvanFor/tulip.git" target="_blank" class="px-5 py-2 bg-primary text-white rounded-full hover:bg-primary/90 transition-all shadow-md hover:shadow-lg">GitHub</a>
+                </div>
+
+                <!-- 移动端菜单按钮 -->
+                <button id="menu-toggle" class="md:hidden text-secondary text-xl">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+
+            <!-- 移动端导航菜单 -->
+            <div id="mobile-menu" class="md:hidden hidden bg-white border-t">
+                <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
+                    <a href="#home" class="py-2 text-secondary hover:text-primary transition-colors">首页</a>
+                    <a href="#features" class="py-2 text-secondary hover:text-primary transition-colors">功能介绍</a>
+                    <a href="#preview" class="py-2 text-secondary hover:text-primary transition-colors">系统预览</a>
+                    <a href="#docs" class="py-2 text-secondary hover:text-primary transition-colors">技术文档</a>
+                    <a href="https://github.com/EvanFor/tulip.git" target="_blank" class="py-3 bg-primary text-white rounded-full text-center hover:bg-primary/90 transition-all shadow-md hover:shadow-lg">GitHub</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- 主内容区 -->
+        <main class="pt-16">
+            <!-- 轮播图区域 -->
+            <section id="home" class="carousel relative h-[80vh] min-h-[600px] gradient-bg">
+                <div id="carousel-inner" class="carousel-inner h-full">
+                    <!-- 轮播图1 -->
+                    <div class="carousel-item w-full h-full flex-shrink-0">
+                        <div class="container mx-auto px-4 h-full flex flex-col md:flex-row items-center justify-between">
+                            <div class="md:w-1/2 text-center md:text-left mb-10 md:mb-0">
+                                <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold text-secondary leading-tight mb-4">
+                                    拓力后台管理系统
+                                </h1>
+
+                                <p class="text-[clamp(1rem,2vw,1.25rem)] text-gray-600 mb-8 max-w-xl mx-auto md:mx-0">
+                                    快速开发 · 安全稳定 · 全端适配<br>
+                                    助力企业高效构建管理平台
+                                </p>
+
+                                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                                    <a href="#preview" class="px-8 py-3 bg-primary text-white rounded-full text-lg font-medium hover:bg-primary/90 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                                        立即体验 <i class="fa fa-arrow-right ml-2"></i>
+                                    </a>
+                                    <a href="#docs" class="px-8 py-3 bg-white text-secondary border border-gray-300 rounded-full text-lg font-medium hover:bg-gray-50 transition-all shadow-md hover:shadow-lg transform hover:-translate-y-1">
+                                        查看文档 <i class="fa fa-book ml-2"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="md:w-1/2 flex justify-center">
+                                <img src="./static/image/1.png" alt="管理系统界面" class="rounded-xl shadow-2xl max-w-full h-auto transform hover:scale-[1.02] transition-transform duration-700">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 轮播图2 -->
+                    <div class="carousel-item w-full h-full flex-shrink-0">
+                        <div class="container mx-auto px-4 h-full flex flex-col md:flex-row items-center justify-between">
+                            <div class="md:w-1/2 text-center md:text-left mb-10 md:mb-0">
+                                <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold text-secondary leading-tight mb-4">
+                                    核心功能一目了然
+                                </h1>
+
+                                <div class="space-y-4 max-w-xl mx-auto md:mx-0">
+                                    <div class="flex items-start">
+                                        <div class="flex-shrink-0 bg-primary/10 p-3 rounded-full">
+                                            <i class="fa fa-lock text-primary text-xl"></i>
+                                        </div>
+                                        <div class="ml-4">
+                                            <h3 class="text-lg font-semibold text-secondary">权限管理</h3>
+                                            <p class="text-gray-600">角色+菜单+数据权限细粒度控制，保障系统安全</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <div class="flex-shrink-0 bg-primary/10 p-3 rounded-full">
+                                            <i class="fa fa-chart-line text-primary text-xl"></i>
+                                        </div>
+                                        <div class="ml-4">
+                                            <h3 class="text-lg font-semibold text-secondary">数据看板</h3>
+                                            <p class="text-gray-600">实时统计图表&可视化分析，助力决策</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <div class="flex-shrink-0 bg-primary/10 p-3 rounded-full">
+                                            <i class="fa fa-code text-primary text-xl"></i>
+                                        </div>
+                                        <div class="ml-4">
+                                            <h3 class="text-lg font-semibold text-secondary">代码生成</h3>
+                                            <p class="text-gray-600">一键生成CRUD代码，节省80%开发时间</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="#features" class="mt-8 inline-block px-8 py-3 bg-primary text-white rounded-full text-lg font-medium hover:bg-primary/90 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                                    功能详情 <i class="fa fa-th-list ml-2"></i>
+                                </a>
+                            </div>
+                            <div class="md:w-1/2 flex justify-center">
+                                <img src="./static/image/2.png" alt="功能演示" class="rounded-xl shadow-2xl max-w-full h-auto transform hover:scale-[1.02] transition-transform duration-700">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 轮播图3 -->
+                    <div class="carousel-item w-full h-full flex-shrink-0">
+                        <div class="container mx-auto px-4 h-full flex flex-col md:flex-row items-center justify-between">
+                            <div class="md:w-1/2 text-center md:text-left mb-10 md:mb-0">
+                                <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold text-secondary leading-tight mb-4">
+                                    主流技术栈构建
+                                </h1>
+
+                                <div class="grid grid-cols-2 gap-4 max-w-xl mx-auto md:mx-0">
+                                    <div class="bg-white p-5 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                                        <div class="flex items-center mb-3">
+                                            <i class="fa fa-code text-accent text-xl mr-3"></i>
+                                            <h3 class="font-semibold">前端</h3>
+                                        </div>
+                                        <p class="text-gray-600 text-sm">Vue3 + Element Plus + Vite</p>
+                                    </div>
+                                    <div class="bg-white p-5 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                                        <div class="flex items-center mb-3">
+                                            <i class="fa fa-server text-accent text-xl mr-3"></i>
+                                            <h3 class="font-semibold">后端</h3>
+                                        </div>
+                                        <p class="text-gray-600 text-sm">Spring Boot + MyBatis Plus + Redis</p>
+                                    </div>
+                                    <div class="bg-white p-5 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                                        <div class="flex items-center mb-3">
+                                            <i class="fa fa-database text-accent text-xl mr-3"></i>
+                                            <h3 class="font-semibold">数据库</h3>
+                                        </div>
+                                        <p class="text-gray-600 text-sm">MySQL + PostgreSQL + MongoDB</p>
+                                    </div>
+                                    <div class="bg-white p-5 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                                        <div class="flex items-center mb-3">
+                                            <i class="fa fa-cloud text-accent text-xl mr-3"></i>
+                                            <h3 class="font-semibold">部署</h3>
+                                        </div>
+                                        <p class="text-gray-600 text-sm">Docker + Kubernetes + 云原生</p>
+                                    </div>
+                                </div>
+                                <a href="#docs" class="mt-8 inline-block px-8 py-3 bg-primary text-white rounded-full text-lg font-medium hover:bg-primary/90 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                                    技术文档 <i class="fa fa-file-code ml-2"></i>
+                                </a>
+                            </div>
+                            <div class="md:w-1/2 flex justify-center">
+                                <img src="./static/image/3.png" alt="技术栈架构" class="rounded-xl shadow-2xl max-w-full h-auto transform hover:scale-[1.02] transition-transform duration-700">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 轮播图控制按钮 -->
+                <button id="prev-btn" class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/70 backdrop-blur-sm rounded-full flex items-center justify-center text-secondary hover:bg-white transition-colors shadow-md">
+                    <i class="fa fa-chevron-left"></i>
+                </button>
+
+                <button id="next-btn" class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/70 backdrop-blur-sm rounded-full flex items-center justify-center text-secondary hover:bg-white transition-colors shadow-md">
+                    <i class="fa fa-chevron-right"></i>
+                </button>
+
+                <!-- 轮播图指示器 -->
+                <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-2">
+                    <button class="carousel-dot w-3 h-3 rounded-full bg-white/70 hover:bg-white transition-colors active" data-index="0"></button>
+                    <button class="carousel-dot w-3 h-3 rounded-full bg-white/70 hover:bg-white transition-colors" data-index="1"></button>
+                    <button class="carousel-dot w-3 h-3 rounded-full bg-white/70 hover:bg-white transition-colors" data-index="2"></button>
+                </div>
+            </section>
+
+            <!-- 核心功能区 -->
+            <section id="features" class="py-20 bg-white">
+                <div class="container mx-auto px-4">
+                    <div class="text-center mb-16">
+                        <h2 class="text-[clamp(1.75rem,3vw,2.5rem)] font-bold text-secondary mb-4">为什么选择我们？</h2>
+                        <p class="text-gray-600 max-w-2xl mx-auto text-lg">我们的后台管理系统集成了业界领先的技术和设计理念，为您提供高效、安全、美观的管理体验</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- 功能卡片1 -->
+                        <div class="bg-light rounded-xl p-8 shadow-md card-hover">
+                            <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                                <i class="fa fa-mobile text-primary text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-secondary mb-3">全终端适配</h3>
+                            <p class="text-gray-600">
+                                基于响应式设计理念，支持PC、平板、手机等多种设备，一套代码多端运行，随时随地管理业务。
+                            </p>
+                        </div>
+
+                        <!-- 功能卡片2 -->
+                        <div class="bg-light rounded-xl p-8 shadow-md card-hover">
+                            <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                                <i class="fa fa-puzzle-piece text-primary text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-secondary mb-3">灵活扩展</h3>
+                            <p class="text-gray-600">
+                                采用模块化设计，支持插件式集成，轻松扩展业务功能。丰富的API接口让系统集成变得简单高效。
+                            </p>
+                        </div>
+
+                        <!-- 功能卡片3 -->
+                        <div class="bg-light rounded-xl p-8 shadow-md card-hover">
+                            <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                                <i class="fa fa-shield text-primary text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-secondary mb-3">安全可靠</h3>
+                            <p class="text-gray-600">
+                                多层防护机制，包括权限校验、数据加密、防SQL注入、接口签名等，全方位保障系统安全稳定运行。
+                            </p>
+                        </div>
+
+                        <!-- 功能卡片4 -->
+                        <div class="bg-light rounded-xl p-8 shadow-md card-hover">
+                            <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                                <i class="fa fa-bolt text-primary text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-secondary mb-3">高性能架构</h3>
+                            <p class="text-gray-600">
+                                优化的数据库设计和缓存策略，支持高并发访问，响应迅速，确保系统在大数据量下依然保持高效运行。
+                            </p>
+                        </div>
+
+                        <!-- 功能卡片5 -->
+                        <div class="bg-light rounded-xl p-8 shadow-md card-hover">
+                            <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                                <i class="fa fa-code text-primary text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-secondary mb-3">代码生成器</h3>
+                            <p class="text-gray-600">
+                                内置强大的代码生成工具，根据数据库表结构一键生成CRUD代码，大幅提升开发效率，减少重复劳动。
+                            </p>
+                        </div>
+
+                        <!-- 功能卡片6 -->
+                        <div class="bg-light rounded-xl p-8 shadow-md card-hover">
+                            <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                                <i class="fa fa-chart-pie text-primary text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-secondary mb-3">数据可视化</h3>
+                            <p class="text-gray-600">
+                                丰富的图表组件和数据可视化工具，帮助您直观了解业务数据，快速做出决策，提升管理效率。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 预览区 -->
+            <section id="preview" class="py-20 bg-gradient-to-b from-light to-white">
+                <div class="container mx-auto px-4">
+                    <div class="text-center mb-16">
+                        <h2 class="text-[clamp(1.75rem,3vw,2.5rem)] font-bold text-secondary mb-4">系统预览</h2>
+                        <p class="text-gray-600 max-w-2xl mx-auto text-lg">
+                            体验我们精心设计的管理系统界面，直观了解系统功能和操作流程
+                        </p>
+                    </div>
+
+                    <div class="flex flex-col lg:flex-row items-center gap-12">
+                        <!-- 预览窗口 -->
+                        <div class="lg:w-2/3 w-full">
+                            <div class="relative rounded-xl overflow-hidden shadow-2xl">
+                                <!-- 设备框架 -->
+                                <div class="bg-gray-900 rounded-t-xl px-4 py-2 flex items-center">
+                                    <div class="flex space-x-2">
+                                        <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                        <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                    </div>
+                                    <div class="ml-auto text-gray-400 text-sm">拓力管理系统演示</div>
+                                </div>
+
+                                <!-- 预览内容 -->
+                                <div class="bg-white h-[450px] overflow-hidden relative">
+                                    <!-- 视频预览 -->
+                                    <div class="w-full h-full">
+                                        <img src="https://picsum.photos/id/160/1200/900" alt="系统视频预览封面" class="w-full h-full object-cover">
+
+                                        <!-- 播放按钮 -->
+                                        <div class="absolute inset-0 bg-black/30 flex items-center justify-center">
+                                            <button id="play-preview" class="w-20 h-20 bg-primary rounded-full flex items-center justify-center text-white shadow-lg hover:bg-primary/90 transition-all transform hover:scale-105">
+                                                <i class="fa fa-play text-2xl"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 演示地址 -->
+                        <div class="lg:w-1/3 w-full">
+                            <h3 class="text-2xl font-bold text-secondary mb-6">在线演示</h3>
+                            <p class="text-gray-600 mb-8">
+                                访问我们的在线演示系统，体验完整功能。无需安装，立即开始使用。
+                            </p>
+
+                            <div class="bg-white rounded-xl p-6 shadow-md">
+                                <div class="flex items-center mb-4">
+                                    <i class="fa fa-link text-primary text-xl mr-3"></i>
+                                    <h4 class="font-semibold text-secondary">演示地址</h4>
+                                </div>
+                                <a href="https://backend.jinsefeng.me/" target="_blank" class="block text-accent hover:text-blue-800 mb-6 break-all">
+                                    https://backend.jinsefeng.me/
+                                </a>
+
+                                <div class="flex items-center mb-4">
+                                    <i class="fa fa-user text-primary text-xl mr-3"></i>
+                                    <h4 class="font-semibold text-secondary">演示账号</h4>
+                                </div>
+                                <div class="space-y-2 mb-6">
+                                    <p class="text-gray-600"><span class="font-medium">管理员:</span> admin / 123456</p>
+                                    <p class="text-gray-600"><span class="font-medium">普通用户:</span> user / 123456</p>
+                                </div>
+
+                                <div class="flex items-center">
+                                    <i class="fa fa-info-circle text-primary text-xl mr-3"></i>
+                                    <p class="text-gray-600">演示系统每小时重置一次，请勿上传重要数据</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 技术支持与文档 -->
+            <section id="docs" class="py-20 bg-white">
+                <div class="container mx-auto px-4">
+                    <div class="text-center mb-16">
+                        <h2 class="text-[clamp(1.75rem,3vw,2.5rem)] font-bold text-secondary mb-4">技术支持</h2>
+                        <p class="text-gray-600 max-w-2xl mx-auto text-lg">
+                            我们提供完善的文档和技术支持，帮助您快速上手和解决遇到的问题
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- 文档卡片 -->
+                        <div class="bg-light rounded-xl p-8 shadow-md hover:shadow-lg transition-all border border-gray-100">
+                            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+                                <i class="fa fa-book text-blue-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-secondary mb-3">开发文档</h3>
+                            <p class="text-gray-600 mb-4">
+                                详细的开发指南和API文档，帮助您快速掌握系统架构和开发方法。
+                            </p>
+                            <a href="#" class="text-primary hover:text-blue-700 font-medium flex items-center">
+                                查看文档 <i class="fa fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+
+                        <!-- 教程卡片 -->
+                        <div class="bg-light rounded-xl p-8 shadow-md hover:shadow-lg transition-all border border-gray-100">
+                            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6">
+                                <i class="fa fa-video text-green-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-secondary mb-3">视频教程</h3>
+                            <p class="text-gray-600 mb-4">
+                                丰富的视频教程，从环境搭建到功能开发，一步一步引导您使用系统。
+                            </p>
+                            <a href="#" class="text-primary hover:text-blue-700 font-medium flex items-center">
+                                观看教程 <i class="fa fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+
+                        <!-- 社区卡片 -->
+                        <div class="bg-light rounded-xl p-8 shadow-md hover:shadow-lg transition-all border border-gray-100">
+                            <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-6">
+                                <i class="fa fa-users text-purple-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-secondary mb-3">社区支持</h3>
+                            <p class="text-gray-600 mb-4">
+                                加入我们的开发者社区，与其他开发者交流经验，获取最新资讯和技术支持。
+                            </p>
+                            <a href="#" class="text-primary hover:text-blue-700 font-medium flex items-center">
+                                加入社区 <i class="fa fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- 页脚 -->
+        <footer class="bg-secondary text-white py-12">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div>
+                        <div class="flex items-center space-x-2 mb-6">
+                            <i class="fa fa-cogs text-primary text-2xl"></i>
+                            <span class="text-xl font-bold">拓力(Tulip)</span>
+                        </div>
+                        <p class="text-gray-400 mb-6">
+                            企业级后台管理系统，助力企业高效构建管理平台，提升工作效率。
+                        </p>
+                        <div class="flex space-x-4">
+                            <a href="https://github.com/EvanFor/tulip.git" target="_blank" class="text-gray-400 hover:text-primary transition-colors">
+                                <i class="fa fa-github"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                                <i class="fa fa-weixin"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                                <i class="fa fa-weibo"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-lg font-semibold mb-6">产品</h4>
+                        <ul class="space-y-3">
+                            <li><a href="#features" class="text-gray-400 hover:text-primary transition-colors">功能介绍</a></li>
+                            <li><a href="#preview" class="text-gray-400 hover:text-primary transition-colors">系统预览</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">更新日志</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">版本对比</a></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 class="text-lg font-semibold mb-6">资源</h4>
+                        <ul class="space-y-3">
+                            <li><a href="#docs" class="text-gray-400 hover:text-primary transition-colors">开发文档</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">API参考</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">示例代码</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">常见问题</a></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 class="text-lg font-semibold mb-6">联系我们</h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-center">
+                                <i class="fa fa-envelope text-primary mr-2"></i>
+                                <a href="mailto:support@tulip.com" class="text-gray-400 hover:text-primary transition-colors">support@tulip.com</a>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fa fa-weixin text-primary mr-2"></i>
+                                <span class="text-gray-400">tulip_admin</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fa fa-qq text-primary mr-2"></i>
+                                <span class="text-gray-400">654321789</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
+                    <p>© 2025 拓力(Tulip) 企业级后台管理系统. 保留所有权利.</p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- JavaScript -->
+        <script>
+            // 导航栏滚动效果
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('navbar-scrolled');
+                } else {
+                    navbar.classList.remove('navbar-scrolled');
+                }
+            });
+
+            // 移动端菜单切换
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            menuToggle.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // 轮播图功能
+            const carouselInner = document.getElementById('carousel-inner');
+            const carouselItems = document.querySelectorAll('.carousel-item');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const dots = document.querySelectorAll('.carousel-dot');
+            let currentIndex = 0;
+
+            function updateCarousel() {
+                carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+                // 更新指示器
+                dots.forEach((dot, index) => {
+                    if (index === currentIndex) {
+                        dot.classList.add('bg-primary');
+                        dot.classList.remove('bg-white/70');
+                    } else {
+                        dot.classList.remove('bg-primary');
+                        dot.classList.add('bg-white/70');
+                    }
+                });
+            }
+
+            prevBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
+                updateCarousel();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % carouselItems.length;
+                updateCarousel();
+            });
+
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateCarousel();
+                });
+            });
+
+            // 自动轮播
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % carouselItems.length;
+                updateCarousel();
+            }, 5000);
+
+            // 视频预览功能
+            const playButton = document.getElementById('play-preview');
+            playButton.addEventListener('click', () => {
+                alert('视频播放功能将在此处实现');
+                // 实际应用中，这里应该显示视频播放器
+            });
+        </script>
+    </body>
+</html>
