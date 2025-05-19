@@ -58,6 +58,10 @@
 
         <style>
             /* 全局样式 */
+            html {
+                scroll-behavior: smooth;
+            }
+
             body {
                 font-family: 'Inter', system-ui, sans-serif;
             }
@@ -574,15 +578,20 @@
             // 轮播图功能
             const carouselInner = document.getElementById('carousel-inner');
             const carouselItems = document.querySelectorAll('.carousel-item');
+            const dots = document.querySelectorAll('.carousel-dot');
             const prevBtn = document.getElementById('prev-btn');
             const nextBtn = document.getElementById('next-btn');
-            const dots = document.querySelectorAll('.carousel-dot');
+
             let currentIndex = 0;
+            const itemWidth = 100; // 百分比
 
+            // 更新轮播图位置
             function updateCarousel() {
-                carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
+                carouselInner.style.transform = `translateX(-${currentIndex * itemWidth}%)`;
+            }
 
-                // 更新指示器
+            // 更新指示器状态
+            function updateDots() {
                 dots.forEach((dot, index) => {
                     if (index === currentIndex) {
                         dot.classList.add('bg-primary');
@@ -594,28 +603,67 @@
                 });
             }
 
+            // 上一张/下一张
             prevBtn.addEventListener('click', () => {
                 currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
                 updateCarousel();
+                updateDots();
             });
 
             nextBtn.addEventListener('click', () => {
                 currentIndex = (currentIndex + 1) % carouselItems.length;
                 updateCarousel();
+                updateDots();
             });
 
+            // 点击指示器切换轮播图
             dots.forEach((dot, index) => {
                 dot.addEventListener('click', () => {
                     currentIndex = index;
                     updateCarousel();
+                    updateDots();
                 });
             });
 
             // 自动轮播
-            setInterval(() => {
+            let autoplayInterval = setInterval(() => {
                 currentIndex = (currentIndex + 1) % carouselItems.length;
                 updateCarousel();
+                updateDots();
             }, 5000);
+
+            // 鼠标悬停暂停自动轮播
+            carouselInner.addEventListener('mouseenter', () => {
+                clearInterval(autoplayInterval);
+            });
+
+            // 鼠标离开恢复自动轮播
+            carouselInner.addEventListener('mouseleave', () => {
+                autoplayInterval = setInterval(() => {
+                    currentIndex = (currentIndex + 1) % carouselItems.length;
+                    updateCarousel();
+                    updateDots();
+                }, 5000);
+            });
+
+            // 滚动动画
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.animate-on-scroll').forEach(element => {
+                observer.observe(element);
+            });
 
             // 视频预览功能
             const playButton = document.getElementById('play-preview');
