@@ -96,8 +96,12 @@
         <nav id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 bg-white/90 backdrop-blur-sm shadow-sm">
             <div class="container mx-auto px-4 py-3 flex justify-between items-center">
                 <div class="flex items-center space-x-2">
-                    <i class="fa fa-cogs text-primary text-2xl"></i>
-                    <span class="text-xl font-bold text-secondary">拓力(Tulip)</span>
+                    <a href="#" class="flex items-center">
+                        <div class="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
+                            <i class="fa fa-cube text-white"></i>
+                        </div>
+                        <span class="ml-2 text-xl font-semibold text-dark">拓力(Tulip)</span>
+                    </a>
                 </div>
 
                 <!-- 桌面导航 -->
@@ -106,6 +110,7 @@
                     <a href="#features" class="text-secondary hover:text-primary transition-colors">功能介绍</a>
                     <a href="#preview" class="text-secondary hover:text-primary transition-colors">系统预览</a>
                     <a href="#docs" class="text-secondary hover:text-primary transition-colors">技术文档</a>
+                    <a href="#faq" class="text-secondary hover:text-primary transition-colors">常见问题</a>
                     <a href="#docs" class="text-secondary hover:text-primary transition-colors">更新日志</a>
                     <a href="https://github.com/EvanFor/tulip.git" target="_blank" class="px-5 py-2 bg-primary text-white rounded-full hover:bg-primary/90 transition-all shadow-md hover:shadow-lg">GitHub</a>
                 </div>
@@ -171,7 +176,7 @@
 
                                 <div class="space-y-4 max-w-xl mx-auto md:mx-0">
                                     <div class="flex items-start">
-                                        <div class="flex-shrink-0 bg-primary/10 p-3 rounded-full">
+                                        <div class="flex-shrink-0 bg-primary/10 p-3 rounded-full flex items-center justify-center w-12 h-12">
                                             <i class="fa fa-lock text-primary text-xl"></i>
                                         </div>
                                         <div class="ml-4">
@@ -180,7 +185,7 @@
                                         </div>
                                     </div>
                                     <div class="flex items-start">
-                                        <div class="flex-shrink-0 bg-primary/10 p-3 rounded-full">
+                                        <div class="flex-shrink-0 bg-primary/10 p-3 rounded-full flex items-center justify-center w-12 h-12">
                                             <i class="fa fa-chart-line text-primary text-xl"></i>
                                         </div>
                                         <div class="ml-4">
@@ -189,7 +194,7 @@
                                         </div>
                                     </div>
                                     <div class="flex items-start">
-                                        <div class="flex-shrink-0 bg-primary/10 p-3 rounded-full">
+                                        <div class="flex-shrink-0 bg-primary/10 p-3 rounded-full flex items-center justify-center w-12 h-12">
                                             <i class="fa fa-code text-primary text-xl"></i>
                                         </div>
                                         <div class="ml-4">
@@ -421,6 +426,64 @@
                                 <div class="flex items-center">
                                     <i class="fa fa-info-circle text-primary text-xl mr-3"></i>
                                     <p class="text-gray-600">演示系统每小时重置一次，请勿上传重要数据</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 常见问题 -->
+            <section id="faq" class="py-20 bg-white">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center max-w-3xl mx-auto mb-16">
+                        <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-dark">常见问题</h2>
+                        <p class="mt-4 text-gray-600">我们整理了客户最常问的问题，如果您有其他疑问，欢迎随时联系我们。</p>
+                    </div>
+
+                    <div class="max-w-3xl mx-auto">
+                        <div class="space-y-4">
+                            <!-- FAQ 项目 1 -->
+                            <div class="border border-gray-200 rounded-lg overflow-hidden">
+                                <button class="faq-toggle w-full flex justify-between items-center p-6 text-left bg-white hover:bg-gray-50 transition-custom">
+                                    <span class="font-medium text-dark">Tulip产品适合哪些类型的企业？</span>
+                                    <i class="fa fa-chevron-down text-gray-400 transition-transform"></i>
+                                </button>
+                                <div class="faq-content hidden p-6 pt-0 bg-white border-t border-gray-100">
+                                    <p class="text-gray-600">Tulip的产品适用于各种规模和行业的企业，尤其是金融、电商、制造、物流等领域。我们的解决方案可以根据企业的具体需求进行定制，无论是小型创业公司还是大型跨国企业，都能从中受益。</p>
+                                </div>
+                            </div>
+
+                            <!-- FAQ 项目 2 -->
+                            <div class="border border-gray-200 rounded-lg overflow-hidden">
+                                <button class="faq-toggle w-full flex justify-between items-center p-6 text-left bg-white hover:bg-gray-50 transition-custom">
+                                    <span class="font-medium text-dark">如何开始使用Tulip的产品？</span>
+                                    <i class="fa fa-chevron-down text-gray-400 transition-transform"></i>
+                                </button>
+                                <div class="faq-content hidden p-6 pt-0 bg-white border-t border-gray-100">
+                                    <p class="text-gray-600">您可以通过我们的官网预约产品演示，我们的销售团队会与您联系，了解您的具体需求并提供个性化的解决方案。之后，我们会安排专业的技术团队进行系统部署和培训，确保您的团队能够快速上手。</p>
+                                </div>
+                            </div>
+
+                            <!-- FAQ 项目 3 -->
+                            <div class="border border-gray-200 rounded-lg overflow-hidden">
+                                <button class="faq-toggle w-full flex justify-between items-center p-6 text-left bg-white hover:bg-gray-50 transition-custom">
+                                    <span class="font-medium text-dark">Tulip提供哪些售后服务？</span>
+                                    <i class="fa fa-chevron-down text-gray-400 transition-transform"></i>
+                                </button>
+                                <div class="faq-content hidden p-6 pt-0 bg-white border-t border-gray-100">
+                                    <p class="text-gray-600">我们提供7×24小时的技术支持，包括电话、邮件和在线聊天。此外，我们还提供定期的系统维护和升级服务，确保您的系统始终保持最佳状态。我们的专业服务团队还可以为您提供定制化的培训和咨询服务。</p>
+                                </div>
+                            </div>
+
+                            <!-- FAQ 项目 4 -->
+                            <div class="border border-gray-200 rounded-lg overflow-hidden">
+                                <button class="faq-toggle w-full flex justify-between items-center p-6 text-left bg-white hover:bg-gray-50 transition-custom">
+                                    <span class="font-medium text-dark">数据安全如何保障？</span>
+                                    <i class="fa fa-chevron-down text-gray-400 transition-transform"></i>
+                                </button>
+                                <div class="faq-content hidden p-6 pt-0 bg-white border-t border-gray-100">
+                                    <p class="text-gray-600">Tulip采用多层次的数据安全保障措施，包括数据加密、访问控制、安全审计、备份恢复等。我们的系统符合国际安全标准，并通过了严格的安全测试。此外，我们定期进行安全漏洞评估和修复，确保您的数据始终安全可靠。</p>
                                 </div>
                             </div>
                         </div>
@@ -662,6 +725,37 @@
             document.querySelectorAll('.animate-on-scroll').forEach(element => {
                 observer.observe(element);
             });
+
+            // FAQ 切换
+            const faqToggles = document.querySelectorAll('.faq-toggle');
+
+            faqToggles.forEach(toggle => {
+                toggle.addEventListener('click', () => {
+                    const content = toggle.nextElementSibling;
+                    const icon = toggle.querySelector('i');
+
+                    // 关闭其他所有FAQ
+                    document.querySelectorAll('.faq-content').forEach(item => {
+                        if (item !== content) {
+                            item.classList.add('hidden');
+                            item.previousElementSibling.querySelector('i').classList.remove('rotate-180');
+                        }
+                    });
+
+                    // 切换当前FAQ
+                    content.classList.toggle('hidden');
+                    if (!content.classList.contains('hidden')) {
+                        icon.classList.add('rotate-180');
+                    } else {
+                        icon.classList.remove('rotate-180');
+                    }
+                });
+            });
+
+            // 初始化第一个FAQ为打开状态
+            if (faqToggles.length > 0) {
+                faqToggles[0].click();
+            }
 
             // 视频预览功能
             const playButton = document.getElementById('play-preview');
