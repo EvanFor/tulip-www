@@ -54,6 +54,23 @@
                 .gradient-bg {
                     background: linear-gradient(135deg, #E6F4FF 0%, #F0F7FF 100%);
                 }
+
+                /* 新增模态框样式 */
+                .modal-center {
+                    display: none;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .modal-active {
+                    display: flex; /* 激活时显示 */
+                }
+
+                .modal-content {
+                    max-width: 500px; /* 可根据需要调整最大宽度 */
+                    max-height: 90vh; /* 最大高度为视口高度的 90% */
+                    overflow-y: auto; /* 当内容超出高度时显示滚动条 */
+                }
             }
         </style>
 
@@ -588,7 +605,7 @@
                             <p class="text-gray-600 mb-4">
                                 详细的开发指南和API文档，帮助您快速掌握系统架构和开发方法。
                             </p>
-                            <a href="#" class="text-primary hover:text-blue-700 font-medium flex items-center">
+                            <a href="https://github.com/EvanFor/tulip/tree/dev/docs" class="text-primary hover:text-blue-700 font-medium flex items-center">
                                 查看文档 <i class="fa fa-arrow-right ml-2"></i>
                             </a>
                         </div>
@@ -602,7 +619,7 @@
                             <p class="text-gray-600 mb-4">
                                 丰富的视频教程，从环境搭建到功能开发，一步一步引导您使用系统。
                             </p>
-                            <a href="#" class="text-primary hover:text-blue-700 font-medium flex items-center">
+                            <a href="https://github.com/EvanFor/tulip/tree/dev/videos" class="text-primary hover:text-blue-700 font-medium flex items-center">
                                 观看教程 <i class="fa fa-arrow-right ml-2"></i>
                             </a>
                         </div>
@@ -616,13 +633,21 @@
                             <p class="text-gray-600 mb-4">
                                 加入开发者社区，交流经验、获取资讯与技术支持。
                             </p>
-                            <a href="#" class="text-primary hover:text-blue-700 font-medium flex items-center">
+                            <a href="#" class="text-primary hover:text-blue-700 font-medium flex items-center" id="join-community-btn">
                                 加入社区 <i class="fa fa-arrow-right ml-2"></i>
                             </a>
                         </div>
                     </div>
                 </div>
             </section>
+
+            <!-- 微信群二维码模态框 -->
+            <div id="wechat-qrcode-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden modal-center z-50">
+                <div class="bg-white p-8 rounded-lg shadow-lg modal-content">
+                    <img src="./static/image/wechat_qrcode.jpg" alt="微信群二维码" class="max-w-full h-auto">
+                    <button id="close-modal" class="mt-4 block w-full bg-primary text-white py-2 rounded hover:bg-primary/90">关闭</button>
+                </div>
+            </div>
         </main>
 
         <!-- 页脚 -->
@@ -837,6 +862,24 @@
             const playButton = document.getElementById('play-preview');
             playButton.addEventListener('click', () => {
                 alert('请添加管理员微信：xiaomuzi_1206，获取视频预览地址');
+            });
+
+            // 获取元素
+            const joinCommunityBtn = document.getElementById('join-community-btn');
+            const wechatQrcodeModal = document.getElementById('wechat-qrcode-modal');
+            const closeModalBtn = document.getElementById('close-modal');
+
+            // 点击“加入社区”按钮显示模态框
+            joinCommunityBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                wechatQrcodeModal.classList.remove('hidden');
+                wechatQrcodeModal.classList.add('modal-active');
+            });
+
+            // 点击“关闭”按钮隐藏模态框
+            closeModalBtn.addEventListener('click', () => {
+                wechatQrcodeModal.classList.remove('modal-active');
+                wechatQrcodeModal.classList.add('hidden');
             });
         </script>
     </body>
