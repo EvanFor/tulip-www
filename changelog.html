@@ -1,116 +1,114 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 
-<html lang="zh-CN">
-
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>拓力(Tulip) - 更新日志</title>
-        <meta name="description" content="拓力(Tulip)企业级后台管理系统的更新日志，记录系统的重要更新和改进。">
-        <!-- Tailwind CSS -->
-        <script src="https://cdn.tailwindcss.com"></script>
-        <!-- Font Awesome -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
-
-        <!-- 自定义Tailwind配置 -->
-        <script>
-            tailwind.config = {
-                theme: {
-                    extend: {
-                        colors: {
-                            primary: '#4FC08D', // 主色调：绿松色
-                            secondary: '#2C3E50', // 辅助色：深蓝
-                            accent: '#3498DB', // 强调色：亮蓝
-                            light: '#F0F7FF', // 浅色背景（浅蓝色）
-                            dark: '#34495E', // 深色文本
-                            success: '#2ECC71', // 成功/修复色
-                            info: '#3498DB', // 信息/优化色
-                            warning: '#F39C12', // 警告/添加色
+    <html lang="zh-CN">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>拓力(Tulip) - 更新日志</title>
+            <meta name="description" content="拓力(Tulip)企业级后台管理系统的更新日志，记录系统的重要更新和改进。">
+            <!-- Tailwind CSS -->
+            <script src="https://cdn.tailwindcss.com"></script>
+            <!-- Font Awesome -->
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+            <!-- 自定义Tailwind配置 -->
+            <script>
+                tailwind.config = {
+                    theme: {
+                        extend: {
+                            colors: {
+                                primary: '#4FC08D', // 主色调：绿松色
+                                secondary: '#2C3E50', // 辅助色：深蓝
+                                accent: '#3498DB', // 强调色：亮蓝
+                                light: '#F0F7FF', // 浅色背景（浅蓝色）
+                                dark: '#34495E', // 深色文本
+                                success: '#2ECC71', // 成功/修复色
+                                info: '#3498DB', // 信息/优化色
+                                warning: '#F39C12', // 警告/添加色
+                            },
+                            fontFamily: {
+                                inter: ['Inter', 'system-ui', 'sans-serif'],
+                            },
                         },
-                        fontFamily: {
-                            inter: ['Inter', 'system-ui', 'sans-serif'],
-                        },
-                    },
+                    }
                 }
-            }
-        </script>
+            </script>
 
-        <style>
-            body {
-                font-family: 'Inter', system-ui, sans-serif;
-                background-color: #F0F7FF;
-                color: #34495E;
-            }
+            <style>
+                body {
+                    font-family: 'Inter', system-ui, sans-serif;
+                    background-color: #F0F7FF;
+                    color: #34495E;
+                }
 
-            h1, h2 {
-                color: #2C3E50;
-            }
+                h1, h2 {
+                    color: #2C3E50;
+                }
 
-            .container {
-                max-width: 1200px;
-                margin: 0 auto;
-                padding: 2rem;
-            }
+                .container {
+                    max-width: 1200px;
+                    margin: 0 auto;
+                    padding: 2rem;
+                }
 
-            .changelog-entry {
-                border: 1px solid #e0e0e0;
-                border-radius: 8px;
-                padding: 1.5rem;
-                margin-bottom: 1.5rem;
-                background-color: white;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            }
+                .changelog-entry {
+                    border: 1px solid #e0e0e0;
+                    border-radius: 8px;
+                    padding: 1.5rem;
+                    margin-bottom: 1.5rem;
+                    background-color: white;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                }
 
-            .changelog-date {
-                font-size: 0.9rem;
-                color: #7f8c8d;
-                margin-bottom: 0.5rem;
-            }
+                .changelog-date {
+                    font-size: 0.9rem;
+                    color: #7f8c8d;
+                    margin-bottom: 0.5rem;
+                }
 
-            .changelog-features {
-                list-style-type: none;
-                padding-left: 0;
-            }
+                .changelog-features {
+                    list-style-type: none;
+                    padding-left: 0;
+                }
 
-            .changelog-features li {
-                margin-bottom: 0.75rem;
-                padding-left: 1.5rem;
-                position: relative;
-            }
+                .changelog-features li {
+                    margin-bottom: 0.75rem;
+                    padding-left: 1.5rem;
+                    position: relative;
+                }
 
-            .changelog-features li::before {
-                content: '';
-                position: absolute;
-                left: 0;
-                top: 0.5rem;
-                width: 0.6rem;
-                height: 0.6rem;
-                border-radius: 50%;
-            }
+                .changelog-features li::before {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    top: 0.5rem;
+                    width: 0.6rem;
+                    height: 0.6rem;
+                    border-radius: 50%;
+                }
 
-            .changelog-features .fix::before {
-                background-color: #2ECC71;
-            }
+                .changelog-features .fix::before {
+                    background-color: #2ECC71;
+                }
 
-            .changelog-features .optimization::before {
-                background-color: #3498DB;
-            }
+                .changelog-features .optimization::before {
+                    background-color: #3498DB;
+                }
 
-            .changelog-features .addition::before {
-                background-color: #F39C12;
-            }
+                .changelog-features .addition::before {
+                    background-color: #F39C12;
+                }
 
-            .category-header {
-                font-weight: 600;
-                margin-top: 1rem;
-                margin-bottom: 0.5rem;
-                text-transform: uppercase;
-                font-size: 0.9rem;
-            }
-        </style>
-    </head>
+                .category-header {
+                    font-weight: 600;
+                    margin-top: 1rem;
+                    margin-bottom: 0.5rem;
+                    text-transform: uppercase;
+                    font-size: 0.9rem;
+                }
+            </style>
+        </head>
 
-    <body>
+        <body>
         <!-- 导航栏 -->
         <nav id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 bg-white/90 backdrop-blur-sm shadow-sm">
             <div class="container mx-auto px-4 py-3 flex justify-between items-center">
@@ -151,37 +149,82 @@
         </nav>
 
         <main class="pt-16">
-                <div class="container">
-                    <h1 class="text-3xl font-bold mb-4">更新日志</h1>
+            <div class="container">
+                <h1 class="text-3xl font-bold mb-4">更新日志</h1>
 
-                    <!-- 示例更新条目 -->
-                    <div class="changelog-entry">
-                        <div class="changelog-date">2024年7月15日</div>
-                        <h2 class="text-xl font-bold mb-2">版本 1.0.0</h2>
+                <!-- 2024年7月15日版本 1.0.0 -->
+                <div class="changelog-entry">
+                    <div class="changelog-date">2024年7月15日</div>
+                    <h2 class="text-xl font-bold mb-2">版本 1.0.0</h2>
 
-                        <div class="category-header text-success">
-                            <span><i class="fa fa-wrench mr-2"></i>修复</span>
-                        </div>
-                        <ul class="changelog-features">
-                            <li class="fix">修复了移动端轮播按钮贴边和底边无留白的问题。</li>
-                        </ul>
-
-                        <div class="category-header text-info">
-                            <span><i class="fa fa-bolt mr-2"></i>优化</span>
-                        </div>
-                        <ul class="changelog-features">
-                            <li class="optimization">优化了部分页面的响应式布局。</li>
-                        </ul>
-
-                        <div class="category-header text-warning">
-                           <span> <i class="fa fa-plus-circle mr-2"></i>添加</span>
-                        </div>
-                        <ul class="changelog-features">
-                            <li class="addition">添加了更新日志页面。</li>
-                        </ul>
+                    <div class="category-header text-warning">
+                        <i class="fa fa-plus-circle mr-2"></i>添加
                     </div>
+                    <ul class="changelog-features">
+                        <li class="addition">完成基本的RBAC权限管理</li>
+                        <li class="addition">完成数据看板的基本功能</li>
+                        <li class="addition">完成代码生成器的基本功能</li>
+                        <li class="addition">完成系统设置的基本功能</li>
+                        <li class="addition">完成数据字典的基本功能</li>
+                        <li class="addition">完成配置中心的基本功能</li>
+                        <li class="addition">完成数据导入导出的基本功能</li>
+                        <li class="addition">完成电商模块，包括商城，品牌，商品，优惠，订单，物流等模块</li>
+                        <li class="addition">完成爬虫模块</li>
+                        <li class="addition">完成在线考试模块，包括试卷，阅卷等模块</li>
+                        <li class="addition">完成在线聊天模块，包括点对点，群聊，发送表情，文件，打语音，打视频功能</li>
+                        <li class="addition">完成在线支付模块，包括微信支付，支付宝支付模块</li>
+                        <li class="addition">完成排课系统模块，包括门店，学员，家长，教师，课程，课件，排课，课时记录，教师收益等模块</li>
+                        <li class="addition">完成评论模块</li>
+                        <li class="addition">完成博客模块</li>
+                        <li class="addition">完成移动端API模块</li>
+                        <li class="addition">完成移动端小程序模块</li>
+                        <li class="addition">完成用户模块，包括用户管理，多平台用户合并，用户登记，钱包，积分，钱包明细，用户地址等模块</li>
+                        <li class="addition">完成数据权限模块</li>
+                        <li class="addition">完成站内信模块</li>
+                        <li class="addition">完成邮件发送模块</li>
+                        <li class="addition">完成短信通知模块</li>
+                        <li class="addition">完成动态任务调度模块</li>
+                        <li class="addition">完成用户行为统计模块</li>
+                        <li class="addition">完成搜索模块</li>
+                        <li class="addition">完成推荐模块</li>
+                        <li class="addition">完成用户资源管理模块</li>
+                    </ul>
                 </div>
-            </main>
+
+                <!-- 2024年7月20日版本 1.0.1 -->
+                <div class="changelog-entry">
+                    <div class="changelog-date">2024年7月20日</div>
+                    <h2 class="text-xl font-bold mb-2">版本 1.0.1</h2>
+
+                    <div class="category-header text-success">
+                        <i class="fa fa-wrench mr-2"></i>修复
+                    </div>
+                    <ul class="changelog-features">
+                        <li class="fix">修复了权限管理模块中角色权限分配后未及时更新显示的问题。</li>
+                        <li class="fix">修复了数据看板部分图表数据显示不准确的问题。</li>
+                        <li class="fix">修复了代码生成器生成的部分代码格式错误的问题。</li>
+                    </ul>
+
+                    <div class="category-header text-info">
+                        <i class="fa fa-bolt mr-2"></i>优化
+                    </div>
+                    <ul class="changelog-features">
+                        <li class="optimization">优化了权限管理模块的操作流程，提高权限分配效率。</li>
+                        <li class="optimization">优化了数据看板的加载速度，减少数据展示延迟。</li>
+                        <li class="optimization">优化了代码生成器的配置界面，使其更易于使用。</li>
+                    </ul>
+
+                    <div class="category-header text-warning">
+                        <i class="fa fa-plus-circle mr-2"></i>添加
+                    </div>
+                    <ul class="changelog-features">
+                        <li class="addition">添加了单点登录（SSO）功能，支持与企业现有认证系统集成。</li>
+                        <li class="addition">添加了数据审计模块，记录系统重要操作日志。</li>
+                        <li class="addition">添加了新的数据可视化图表类型，丰富数据展示方式。</li>
+                    </ul>
+                </div>
+            </div>
+        </main>
 
         <script>
             const menuToggle = document.getElementById('menu-toggle');
@@ -191,6 +234,5 @@
                 mobileMenu.classList.toggle('hidden');
             });
         </script>
-    </body>
-
+        </body>
 </html>
