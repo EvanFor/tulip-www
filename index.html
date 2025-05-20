@@ -470,17 +470,10 @@
                                 </div>
 
                                 <!-- 预览内容 -->
-                                <div class="bg-white h-[550px] relative">
+                                <div class="bg-white h-auto relative">
                                     <!-- 视频预览 -->
-                                    <div class="w-full h-full">
-                                        <video poster="./static/image/s3.png" class="w-full h-full object-cover"></video>
-
-                                        <!-- 播放按钮 -->
-                                        <div class="absolute inset-0 bg-black/30 flex items-center justify-center">
-                                            <button id="play-preview" class="w-20 h-20 bg-primary rounded-full flex items-center justify-center text-white shadow-lg hover:bg-primary/90 transition-all transform hover:scale-105">
-                                                <i class="fa fa-play text-2xl"></i>
-                                            </button>
-                                        </div>
+                                    <div class="w-full">
+                                        <video poster="./static/image/s1.png" class="" src="https://s.jinsefeng.me/video/preview.mp4" onclick="this.paused ? this.play() : this.pause();" muted></video>
                                     </div>
                                 </div>
                             </div>
@@ -858,12 +851,6 @@
             if (faqToggles.length > 0) {
                 faqToggles[0].click();
             }
-
-            // 视频预览功能
-            const playButton = document.getElementById('play-preview');
-            playButton.addEventListener('click', () => {
-                alert('请添加管理员微信：xiaomuzi_1206，获取视频预览地址');
-            });
 
             // 获取元素
             const joinCommunityBtn = document.getElementById('join-community-btn');
